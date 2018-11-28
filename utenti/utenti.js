@@ -5,6 +5,14 @@ var router = express.Router();
 
 const utenti = require ('../utenti.js').utenti
 
+//do il permesso
+router.use ('/', function (req,res,next) {
+    if (req.headers.authorization === "admin") {
+      next ();  
+    }
+    else res.json("cagati")
+})
+
 // PAGINA PRINCIPALE UTENTI   
 router.get('/', function (req, res) {
     res.send('Lista degli utenti');
@@ -64,6 +72,7 @@ router.post('/users', function (req, res) {
 
 
 });
+
 
 
 router.post('/', function (req, res) {
